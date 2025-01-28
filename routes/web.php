@@ -21,4 +21,15 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
+
+    // Category
+    Route::prefix('category')->group(function () {
+        Route::get('/', function () {
+            return Inertia::render('Category/Index');
+        })->name('category.index');
+
+        Route::get('/create', function () {
+            return Inertia::render('Category/Create');
+        })->name('category.create');
+    });
 });
