@@ -1,14 +1,14 @@
 <template>
-    <AppLayout title="Manage Category">
+    <AppLayout title="Manage product">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Manage Category
+                Manage product
             </h2>
         </template>
 
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-12">
             <Link
-                :href="route('category.create')"
+                :href="route('product.create')"
                 class="bg-amber-500 hover:bg-amber-700 focus:ring-4 focus:ring-yellow-300 px-5 py-2 rounded-full text-white mb-5 inline-flex items-center justify-center gap-2"
             >
                 <i class="bx bx-plus"></i>
@@ -57,7 +57,8 @@
                                     <span class="sr-only">Image</span>
                                 </th>
                                 <th scope="col" class="px-6 py-3">Items</th>
-                                <th scope="col" class="px-6 py-3">slug</th>
+                                <th scope="col" class="px-6 py-3">Slug</th>
+                                <th scope="col" class="px-6 py-3">Harga</th>
                                 <th scope="col" class="px-6 py-3">Action</th>
                             </tr>
                         </thead>
@@ -75,9 +76,10 @@
                                 <td class="px-6 py-4">Apple MacBook Pro 17"</td>
 
                                 <td class="px-6 py-4">$2999</td>
+                                <td class="px-6 py-4">$2999</td>
                                 <td class="px-6 py-4">
                                     <Link
-                                        :href="route('category.edit')"
+                                        :href="route('product.edit')"
                                         class="font-medium text-blue-600 hover:underline"
                                         ><i class="bx bxs-edit bx-sm"></i
                                     ></Link>

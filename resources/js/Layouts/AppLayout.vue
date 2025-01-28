@@ -73,6 +73,15 @@ const logout = () => {
                                 >
                                     Category
                                 </NavLink>
+
+                                <NavLink
+                                    :href="route('product.index')"
+                                    :active="
+                                        route().current().startsWith('product')
+                                    "
+                                >
+                                    Product
+                                </NavLink>
                             </div>
                         </div>
 

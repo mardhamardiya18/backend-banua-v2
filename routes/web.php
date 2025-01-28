@@ -31,5 +31,24 @@ Route::middleware([
         Route::get('/create', function () {
             return Inertia::render('Category/Create');
         })->name('category.create');
+
+        Route::get('/edit', function () {
+            return Inertia::render('Category/Edit');
+        })->name('category.edit');
+    });
+
+    // Product
+    Route::prefix('product')->group(function () {
+        Route::get('/', function () {
+            return Inertia::render('Product/Index');
+        })->name('product.index');
+
+        Route::get('/create', function () {
+            return Inertia::render('Product/Create');
+        })->name('product.create');
+
+        Route::get('/edit', function () {
+            return Inertia::render('Product/Edit');
+        })->name('product.edit');
     });
 });
