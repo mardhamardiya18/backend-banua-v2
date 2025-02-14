@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('order_items', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('order_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('subproduct_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('order_id')->constrained('orders')->cascadeOnDelete();
+            $table->foreignId('subproduct_id')->constrained('sub_products')->cascadeOnDelete();
             $table->integer('price');
             $table->integer('quantity');
             $table->integer('subtotal');

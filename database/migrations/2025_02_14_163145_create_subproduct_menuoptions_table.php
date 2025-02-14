@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('subproduct_menuoptions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('subproduct_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('menuoption_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('subproduct_id')->constrained('sub_products')->cascadeOnDelete();
+            $table->foreignId('menuoption_id')->constrained('menu_options')->cascadeOnDelete();
             $table->timestamps();
         });
     }

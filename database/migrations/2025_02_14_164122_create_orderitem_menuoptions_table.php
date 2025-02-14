@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('orderitem_menuoptions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('orderitem_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('menuoption_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('orderitem_id')->constrained('order_items')->cascadeOnDelete();
+            $table->foreignId('menuoption_id')->constrained('menu_options')->cascadeOnDelete();
             $table->timestamps();
         });
     }
