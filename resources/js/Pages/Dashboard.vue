@@ -1,5 +1,6 @@
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
+import { Link } from "@inertiajs/vue3";
 </script>
 
 <template>
@@ -23,10 +24,10 @@ import AppLayout from "@/Layouts/AppLayout.vue";
                         </h5>
                         <p class="text-2xl font-bold">10 Items</p>
 
-                        <a
-                            href="#"
+                        <Link
+                            :href="route('product.index')"
                             class="py-2 px-4 bg-rose-500 text-white rounded-lg mt-4 inline-block hover:bg-rose-800 transition duration-200"
-                            >Kelola</a
+                            >Kelola</Link
                         >
                     </div>
 
@@ -38,10 +39,10 @@ import AppLayout from "@/Layouts/AppLayout.vue";
                         </h5>
                         <p class="text-2xl font-bold">10 Items</p>
 
-                        <a
-                            href="#"
+                        <Link
+                            :href="route('category.index')"
                             class="py-2 px-4 bg-amber-500 text-white rounded-lg mt-4 inline-block hover:bg-amber-800 transition duration-200"
-                            >Kelola</a
+                            >Kelola</Link
                         >
                     </div>
 

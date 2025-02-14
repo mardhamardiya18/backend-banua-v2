@@ -29,6 +29,10 @@ const switchToTeam = (team) => {
 const logout = () => {
     router.post(route("logout"));
 };
+
+setTimeout(() => {
+    document.querySelector(".alert")?.remove();
+}, 3000); // Hilang dalam 3 detik
 </script>
 
 <template>

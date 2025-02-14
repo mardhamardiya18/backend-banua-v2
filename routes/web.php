@@ -17,8 +17,9 @@ Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
-])->group(function () {
-    Route::get('/dashboard', function () {
+    'admin',
+])->prefix('admin')->group(function () {
+    Route::get('/', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
