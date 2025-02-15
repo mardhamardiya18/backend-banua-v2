@@ -7,7 +7,11 @@
         </template>
 
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-12">
-            <form class="max-w-md mx-auto">
+            <form
+                @submit.prevent="submit"
+                class="max-w-md mx-auto"
+                enctype="multipart/form-data"
+            >
                 <div class="mb-5">
                     <label
                         for="name"
@@ -15,6 +19,7 @@
                         >Nama Kategori</label
                     >
                     <input
+                        v-model="form.name"
                         type="text"
                         id="name"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
@@ -63,7 +68,12 @@
                                 SVG, PNG, JPG or GIF (MAX. 800x400px)
                             </p>
                         </div>
-                        <input id="dropzone-file" type="file" class="hidden" />
+                        <input
+                            @change="handleFileUpload"
+                            id="dropzone-file"
+                            type="file"
+                            v-show="false"
+                        />
                     </label>
                 </div>
 
@@ -85,7 +95,27 @@
 
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
-import { Link } from "@inertiajs/vue3";
+import { Link, router } from "@inertiajs/vue3";
+import { reactive } from "vue";
+
+const form = reactive({
+    name: "",
+    img_url: null,
+});
+
+const handleFileUpload = (event) => {
+    form.img_url = event.target.files[0];
+};
+
+const submit = () => {
+    const formData = new FormData();
+    formData.append("name", form.name);
+    formData.append("img_url", form.img_url);
+
+    router.post("/admin/category", formData, {
+        forceFormData: true,
+    });
+};
 </script>
 
 <style lang="scss" scoped></style>

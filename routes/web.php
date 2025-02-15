@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -24,19 +25,8 @@ Route::middleware([
     })->name('dashboard');
 
     // Category
-    Route::prefix('category')->group(function () {
-        Route::get('/', function () {
-            return Inertia::render('Category/Index');
-        })->name('category.index');
+    Route::resource('category', CategoryController::class);
 
-        Route::get('/create', function () {
-            return Inertia::render('Category/Create');
-        })->name('category.create');
-
-        Route::get('/edit', function () {
-            return Inertia::render('Category/Edit');
-        })->name('category.edit');
-    });
 
     // Product
     Route::prefix('product')->group(function () {

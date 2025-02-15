@@ -1,3 +1,25 @@
+<script setup>
+import AppLayout from "@/Layouts/AppLayout.vue";
+import { Link, router } from "@inertiajs/vue3";
+
+const { categories } = defineProps({
+    categories: Object,
+});
+
+const destroy = (id) => {
+    if (confirm("Are you sure?")) {
+        router.delete(`/admin/category/${id}`, {
+            preserveScroll: true,
+            onSuccess: () => {
+                alert("Category deleted successfully");
+            },
+        });
+    }
+};
+</script>
+
+<style lang="scss" scoped></style>
+
 <template>
     <AppLayout title="Manage Category">
         <template #header>
@@ -56,31 +78,48 @@
                                 <th scope="col" class="px-16 py-3">
                                     <span class="sr-only">Image</span>
                                 </th>
-                                <th scope="col" class="px-6 py-3">Items</th>
-                                <th scope="col" class="px-6 py-3">slug</th>
+
+                                <th scope="col" class="px-6 py-3">Name</th>
                                 <th scope="col" class="px-6 py-3">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr
+                                v-if="categories.length !== 0"
+                                v-for="category in categories"
+                                :key="category.id"
                                 class="bg-white border-b border-gray-200 hover:bg-gray-50"
                             >
                                 <td class="p-4">
                                     <img
-                                        src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                                        :src="`/storage/${category.img_url}`"
                                         class="w-16 md:w-32 max-w-full max-h-full"
                                         alt="Apple Watch"
                                     />
                                 </td>
-                                <td class="px-6 py-4">Apple MacBook Pro 17"</td>
-
-                                <td class="px-6 py-4">$2999</td>
+                                <td class="px-6 py-4">{{ category.name }}</td>
                                 <td class="px-6 py-4">
                                     <Link
-                                        :href="route('category.edit')"
+                                        :href="
+                                            route('category.edit', {
+                                                category: category.id,
+                                            })
+                                        "
                                         class="font-medium text-blue-600 hover:underline"
                                         ><i class="bx bxs-edit bx-sm"></i
                                     ></Link>
+                                    <button
+                                        @click.prevent="destroy(category.id)"
+                                        class="font-medium text-red-600 hover:underline ms-4"
+                                    >
+                                        <i class="bx bx-trash bx-sm"></i>
+                                    </button>
+                                </td>
+                            </tr>
+
+                            <tr v-else>
+                                <td colspan="4" class="p-5 text-center">
+                                    No data available
                                 </td>
                             </tr>
                         </tbody>
@@ -90,10 +129,3 @@
         </div>
     </AppLayout>
 </template>
-
-<script setup>
-import AppLayout from "@/Layouts/AppLayout.vue";
-import { Link } from "@inertiajs/vue3";
-</script>
-
-<style lang="scss" scoped></style>
