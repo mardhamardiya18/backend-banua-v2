@@ -4,10 +4,12 @@ import AuthenticationCard from "@/Components/AuthenticationCard.vue";
 import AuthenticationCardLogo from "@/Components/AuthenticationCardLogo.vue";
 import Checkbox from "@/Components/Checkbox.vue";
 import InputError from "@/Components/InputError.vue";
-import Banner from "@/Components/Banner.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
+import { useToast } from "vue-toastification";
+
+const toast = useToast();
 
 defineProps({
     canResetPassword: Boolean,
@@ -26,14 +28,15 @@ const submit = () => {
         remember: form.remember ? "on" : "",
     })).post(route("login"), {
         onFinish: () => form.reset("password"),
+        onSuccess: () => {
+            toast.success("Login successfully, Welcome back!");
+        },
     });
 };
 </script>
 
 <template>
     <Head title="Log in" />
-
-    <Banner />
 
     <AuthenticationCard>
         <template #logo>

@@ -2,11 +2,12 @@
 import { ref } from "vue";
 import { Head, Link, router } from "@inertiajs/vue3";
 import ApplicationMark from "@/Components/ApplicationMark.vue";
-import Banner from "@/Components/Banner.vue";
 import Dropdown from "@/Components/Dropdown.vue";
 import DropdownLink from "@/Components/DropdownLink.vue";
 import NavLink from "@/Components/NavLink.vue";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink.vue";
+import { useToast } from "vue-toastification";
+const toast = useToast();
 
 defineProps({
     title: String,
@@ -27,7 +28,14 @@ const switchToTeam = (team) => {
 };
 
 const logout = () => {
-    router.post(route("logout"));
+    router.post(route("logout"), {
+        onSuccess: () => {
+            toast.success("Logout successfully, Goodbye!");
+            setTimeout(() => {
+                router.get(route("login")); // Tunggu toast tampil, lalu redirect
+            }, 2000);
+        },
+    });
 };
 
 setTimeout(() => {
@@ -38,8 +46,6 @@ setTimeout(() => {
 <template>
     <div>
         <Head :title="title" />
-
-        <Banner />
 
         <div class="min-h-screen bg-gray-100">
             <nav class="bg-white border-b border-gray-100">

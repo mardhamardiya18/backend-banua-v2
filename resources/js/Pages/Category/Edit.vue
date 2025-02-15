@@ -104,6 +104,9 @@
 import AppLayout from "@/Layouts/AppLayout.vue";
 import { Link, router } from "@inertiajs/vue3";
 import { reactive } from "vue";
+import { useToast } from "vue-toastification";
+
+const toast = useToast();
 
 const { category, errors } = defineProps({
     category: Object,
@@ -132,7 +135,7 @@ const update = () => {
         router.post(`/admin/category/${category.id}`, formData, {
             forceFormData: true,
             onSuccess: () => {
-                setTimeout(() => alert("Data berhasil disimpan!"), 500);
+                toast.success("Category updated successfully");
             },
         });
     }
