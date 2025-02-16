@@ -6,8 +6,6 @@ import Dropdown from "@/Components/Dropdown.vue";
 import DropdownLink from "@/Components/DropdownLink.vue";
 import NavLink from "@/Components/NavLink.vue";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink.vue";
-import { useToast } from "vue-toastification";
-const toast = useToast();
 
 defineProps({
     title: String,
@@ -28,14 +26,7 @@ const switchToTeam = (team) => {
 };
 
 const logout = () => {
-    router.post(route("logout"), {
-        onSuccess: () => {
-            toast.success("Logout successfully, Goodbye!");
-            setTimeout(() => {
-                router.get(route("login")); // Tunggu toast tampil, lalu redirect
-            }, 2000);
-        },
-    });
+    router.post(route("logout"));
 };
 
 setTimeout(() => {

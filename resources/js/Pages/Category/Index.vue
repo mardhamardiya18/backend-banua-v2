@@ -36,6 +36,7 @@ const destroy = (id) => {
                 <i class="bx bx-plus"></i>
                 Item Baru
             </Link>
+
             <div class="bg-white p-5">
                 <div class="relative overflow-x-auto">
                     <div class="pb-4 bg-white">

@@ -104,9 +104,7 @@
 import AppLayout from "@/Layouts/AppLayout.vue";
 import { Link, router } from "@inertiajs/vue3";
 import { reactive } from "vue";
-import { useToast } from "vue-toastification";
-
-const toast = useToast();
+import Swal from "sweetalert2";
 
 const { category, errors } = defineProps({
     category: Object,
@@ -123,22 +121,35 @@ const handleFileUpload = (event) => {
 };
 
 const update = () => {
-    if (confirm("Are you sure?")) {
-        const formData = new FormData();
-        formData.append("name", item.name);
-        if (item.img_url instanceof File) {
-            formData.append("img_url", item.img_url);
+    Swal.fire({
+        title: "Update item ini?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const formData = new FormData();
+            formData.append("name", item.name);
+            if (item.img_url instanceof File) {
+                formData.append("img_url", item.img_url);
+            }
+
+            formData.append("_method", "PUT");
+
+            router.post(`/admin/category/${category.id}`, formData, {
+                forceFormData: true,
+                onSuccess: () => {
+                    Swal.fire({
+                        title: "Success!",
+                        text: "Category updated successfully",
+                        icon: "success",
+                    });
+                },
+            });
         }
-
-        formData.append("_method", "PUT");
-
-        router.post(`/admin/category/${category.id}`, formData, {
-            forceFormData: true,
-            onSuccess: () => {
-                toast.success("Category updated successfully");
-            },
-        });
-    }
+    });
 };
 </script>
 
