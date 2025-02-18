@@ -1,20 +1,34 @@
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
 import { Link, router } from "@inertiajs/vue3";
+import Swal from "sweetalert2";
 
 const { categories } = defineProps({
     categories: Object,
 });
 
 const destroy = (id) => {
-    if (confirm("Are you sure?")) {
-        router.delete(`/admin/category/${id}`, {
-            preserveScroll: true,
-            onSuccess: () => {
-                alert("Category deleted successfully");
-            },
-        });
-    }
+    Swal.fire({
+        title: "Are you sure?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            router.delete(`/admin/category/${id}`, {
+                preserveScroll: true,
+                onSuccess: () => {
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Your file has been deleted.",
+                        icon: "success",
+                    });
+                },
+            });
+        }
+    });
 };
 </script>
 
@@ -77,7 +91,7 @@ const destroy = (id) => {
                         >
                             <tr>
                                 <th scope="col" class="px-16 py-3">
-                                    <span class="sr-only">Image</span>
+                                    Thumbnail
                                 </th>
 
                                 <th scope="col" class="px-6 py-3">Name</th>

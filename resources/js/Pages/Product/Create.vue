@@ -7,7 +7,11 @@
         </template>
 
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-12">
-            <form class="max-w-md mx-auto">
+            <form
+                @submit.prevent="store"
+                enctype="multipart/form-data"
+                class="max-w-md mx-auto"
+            >
                 <div class="mb-5">
                     <label
                         for="name"
@@ -15,6 +19,7 @@
                         >Nama produk</label
                     >
                     <input
+                        v-model="data.name"
                         type="text"
                         id="name"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
@@ -27,15 +32,21 @@
                     <label
                         for="name"
                         class="block mb-2 text-sm font-medium text-gray-900"
-                        >Harga produk</label
+                        >Pilih kategori</label
                     >
-                    <input
-                        type="text"
-                        id="name"
+                    <select
+                        v-model="data.category"
+                        id="countries"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                        placeholder=""
-                        required
-                    />
+                    >
+                        <option
+                            v-for="category in categories"
+                            :key="category.id"
+                            :value="category.id"
+                        >
+                            {{ category.name }}
+                        </option>
+                    </select>
                 </div>
 
                 <div class="mb-5">
@@ -78,21 +89,33 @@
                                 SVG, PNG, JPG or GIF (MAX. 800x400px)
                             </p>
                         </div>
-                        <input id="dropzone-file" type="file" class="hidden" />
+                        <input
+                            @change="handleFileUpload"
+                            id="dropzone-file"
+                            type="file"
+                            class="hidden"
+                        />
                     </label>
                 </div>
 
-                <button
-                    type="submit"
-                    class="text-white bg-amber-500 hover:bg-amber-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+                <label class="block mb-2 text-sm font-medium text-gray-900"
+                    >Buat deskripsi produk</label
                 >
-                    Submit
-                </button>
-                <Link
-                    :href="route('product.index')"
-                    class="text-white bg-rose-500 inline-block ms-2 hover:bg-rose-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
-                    >Kembali</Link
-                >
+                <div ref="editor"></div>
+
+                <div class="mt-5">
+                    <button
+                        type="submit"
+                        class="text-white bg-amber-500 hover:bg-amber-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+                    >
+                        Simpan produk
+                    </button>
+                    <Link
+                        :href="route('product.index')"
+                        class="text-white bg-rose-500 inline-block ms-2 hover:bg-rose-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+                        >Kembali</Link
+                    >
+                </div>
             </form>
         </div>
     </AppLayout>
@@ -100,7 +123,70 @@
 
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
-import { Link } from "@inertiajs/vue3";
+import { Link, router } from "@inertiajs/vue3";
+import { onMounted, reactive, ref } from "vue";
+import Swal from "sweetalert2";
+import Quill from "quill";
+
+const editor = ref(null);
+let quill = null;
+
+onMounted(() => {
+    quill = new Quill(editor.value, {
+        theme: "snow",
+    });
+});
+
+const { categories } = defineProps({
+    categories: Object,
+});
+
+const data = reactive({
+    name: "",
+    category: "",
+    thumbnail: null,
+});
+
+const handleFileUpload = (e) => {
+    data.thumbnail = e.target.files[0];
+};
+
+const store = () => {
+    Swal.fire({
+        title: "Creating...",
+        timer: 1000,
+        timerProgressBar: true,
+        didOpen: () => {
+            Swal.showLoading();
+        },
+    }).then((result) => {
+        if (result.dismiss === Swal.DismissReason.timer) {
+            const formData = new FormData();
+            formData.append("name", data.name);
+            formData.append("category_id", data.category);
+            formData.append("thumbnail", data.thumbnail);
+            formData.append("description", quill.root.innerHTML);
+
+            router.post("/admin/product", formData, {
+                forceFormData: true,
+                onSuccess: () => {
+                    Swal.fire({
+                        title: "A new one!",
+                        text: "The product has been added",
+                        icon: "success",
+                        timer: 1000,
+                    });
+                },
+            });
+        }
+    });
+};
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="css" scoped>
+.ql-container {
+    border: 1px solid #e2e8f0;
+    border-radius: 0.375rem;
+    background-color: #fff;
+}
+</style>

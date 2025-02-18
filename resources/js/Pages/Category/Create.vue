@@ -97,6 +97,7 @@
 import AppLayout from "@/Layouts/AppLayout.vue";
 import { Link, router } from "@inertiajs/vue3";
 import { reactive } from "vue";
+import Swal from "sweetalert2";
 
 const form = reactive({
     name: "",
@@ -108,12 +109,31 @@ const handleFileUpload = (event) => {
 };
 
 const submit = () => {
-    const formData = new FormData();
-    formData.append("name", form.name);
-    formData.append("img_url", form.img_url);
+    Swal.fire({
+        title: "Creating...",
+        timer: 1000,
+        timerProgressBar: true,
+        didOpen: () => {
+            Swal.showLoading();
+        },
+    }).then((result) => {
+        /* Read more about handling dismissals below */
+        if (result.dismiss === Swal.DismissReason.timer) {
+            const formData = new FormData();
+            formData.append("name", form.name);
+            formData.append("img_url", form.img_url);
 
-    router.post("/admin/category", formData, {
-        forceFormData: true,
+            router.post("/admin/category", formData, {
+                forceFormData: true,
+                onSuccess: () => {
+                    Swal.fire({
+                        title: "A new one!",
+                        text: "Your item has been added",
+                        icon: "success",
+                    });
+                },
+            });
+        }
     });
 };
 </script>

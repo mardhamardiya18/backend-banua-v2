@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -29,17 +30,5 @@ Route::middleware([
 
 
     // Product
-    Route::prefix('product')->group(function () {
-        Route::get('/', function () {
-            return Inertia::render('Product/Index');
-        })->name('product.index');
-
-        Route::get('/create', function () {
-            return Inertia::render('Product/Create');
-        })->name('product.create');
-
-        Route::get('/edit', function () {
-            return Inertia::render('Product/Edit');
-        })->name('product.edit');
-    });
+    Route::resource('product', ProductController::class);
 });

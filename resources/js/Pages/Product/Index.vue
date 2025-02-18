@@ -54,35 +54,56 @@
                         >
                             <tr>
                                 <th scope="col" class="px-16 py-3">
-                                    <span class="sr-only">Image</span>
+                                    Thumbnail
                                 </th>
                                 <th scope="col" class="px-6 py-3">Items</th>
-                                <th scope="col" class="px-6 py-3">Slug</th>
-                                <th scope="col" class="px-6 py-3">Harga</th>
+                                <th scope="col" class="px-6 py-3">Kategori</th>
                                 <th scope="col" class="px-6 py-3">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr
+                                v-if="products.length !== 0"
+                                v-for="product in products"
+                                :key="product.id"
                                 class="bg-white border-b border-gray-200 hover:bg-gray-50"
                             >
                                 <td class="p-4">
                                     <img
-                                        src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                                        :src="`/storage/${product.thumbnail}`"
                                         class="w-16 md:w-32 max-w-full max-h-full"
                                         alt="Apple Watch"
                                     />
                                 </td>
-                                <td class="px-6 py-4">Apple MacBook Pro 17"</td>
+                                <td class="px-6 py-4">{{ product.name }}</td>
 
-                                <td class="px-6 py-4">$2999</td>
-                                <td class="px-6 py-4">$2999</td>
+                                <td class="px-6 py-4">
+                                    {{ product.category.name }}
+                                </td>
                                 <td class="px-6 py-4">
                                     <Link
-                                        :href="route('product.edit')"
+                                        :href="
+                                            route('product.edit', {
+                                                product: product.id,
+                                            })
+                                        "
                                         class="font-medium text-blue-600 hover:underline"
                                         ><i class="bx bxs-edit bx-sm"></i
                                     ></Link>
+                                    <button
+                                        @click.prevent="
+                                            destroy(product.id, product.name)
+                                        "
+                                        class="font-medium text-red-600 hover:underline ms-4"
+                                    >
+                                        <i class="bx bx-trash bx-sm"></i>
+                                    </button>
+                                </td>
+                            </tr>
+
+                            <tr v-else>
+                                <td class="px-6 py-4 text-center" colspan="4">
+                                    No data available
                                 </td>
                             </tr>
                         </tbody>
@@ -95,7 +116,36 @@
 
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
-import { Link } from "@inertiajs/vue3";
+import { Link, router } from "@inertiajs/vue3";
+import Swal from "sweetalert2";
+
+const { products } = defineProps({
+    products: Object,
+});
+
+const destroy = (id, name) => {
+    Swal.fire({
+        title: `Yakin mau hapus produk ${name}?`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            router.delete(`/admin/product/${id}`, {
+                preserveScroll: true,
+                onSuccess: () => {
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Your file has been deleted.",
+                        icon: "success",
+                    });
+                },
+            });
+        }
+    });
+};
 </script>
 
 <style lang="scss" scoped></style>
