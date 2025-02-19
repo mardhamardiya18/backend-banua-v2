@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SubproductController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -31,4 +32,7 @@ Route::middleware([
 
     // Product
     Route::resource('product', ProductController::class);
+
+    // Subproduct
+    Route::resource('subproduct', SubproductController::class);
 });

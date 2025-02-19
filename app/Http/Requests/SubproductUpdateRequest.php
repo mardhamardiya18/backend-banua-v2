@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SubproductRequest extends FormRequest
+class SubproductUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,13 +22,13 @@ class SubproductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'portion' => 'required',
-            'discount' => 'required|numeric',
-            'size' => 'required|numeric',
-            'extra' => 'required|numeric',
-            'price' => 'required',
-            'note' => 'required|string',
-            'product_id' => 'required|exists:products,id',
+            'portion' => 'nullable',
+            'discount' => 'nullable|numeric',
+            'size' => 'nullable|numeric',
+            'extra' => 'nullable|numeric',
+            'price' => 'nullable',
+            'note' => 'nullable|string',
+            'product_id' => 'nullable|exists:products,id',
         ];
     }
 }

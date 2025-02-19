@@ -83,6 +83,17 @@ setTimeout(() => {
                                 >
                                     Product
                                 </NavLink>
+
+                                <NavLink
+                                    :href="route('subproduct.index')"
+                                    :active="
+                                        route()
+                                            .current()
+                                            .startsWith('subproduct')
+                                    "
+                                >
+                                    Sub Product
+                                </NavLink>
                             </div>
                         </div>
 
