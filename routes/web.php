@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubproductController;
 use Illuminate\Foundation\Application;
@@ -35,4 +36,7 @@ Route::middleware([
 
     // Subproduct
     Route::resource('subproduct', SubproductController::class);
+
+    // Product Gallery
+    Route::resource('gallery', GalleryController::class);
 });

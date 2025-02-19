@@ -72,7 +72,7 @@ setTimeout(() => {
                                         route().current().startsWith('category')
                                     "
                                 >
-                                    Category
+                                    Kategori
                                 </NavLink>
 
                                 <NavLink
@@ -81,7 +81,7 @@ setTimeout(() => {
                                         route().current().startsWith('product')
                                     "
                                 >
-                                    Product
+                                    Produk
                                 </NavLink>
 
                                 <NavLink
@@ -92,7 +92,16 @@ setTimeout(() => {
                                             .startsWith('subproduct')
                                     "
                                 >
-                                    Sub Product
+                                    Sub Produk
+                                </NavLink>
+
+                                <NavLink
+                                    :href="route('gallery.index')"
+                                    :active="
+                                        route().current().startsWith('gallery')
+                                    "
+                                >
+                                    Galeri Produk
                                 </NavLink>
                             </div>
                         </div>
