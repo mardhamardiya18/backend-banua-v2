@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ExtraMenuController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\MenuOptionController;
 use App\Http\Controllers\ProductController;
@@ -43,4 +44,7 @@ Route::middleware([
 
     // Menu Options
     Route::resource('menu-option', MenuOptionController::class)->except(['show', 'edit', 'update']);
+
+    // Extra Menu
+    Route::resource('extra-menu', ExtraMenuController::class);
 });

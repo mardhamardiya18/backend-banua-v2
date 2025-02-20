@@ -130,6 +130,7 @@ const submit = () => {
                         title: "A new one!",
                         text: "Your item has been added",
                         icon: "success",
+                        timer: 1000,
                     });
                 },
             });

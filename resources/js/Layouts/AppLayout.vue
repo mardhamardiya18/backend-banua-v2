@@ -114,6 +114,17 @@ setTimeout(() => {
                                 >
                                     Manage Menu
                                 </NavLink>
+
+                                <NavLink
+                                    :href="route('extra-menu.index')"
+                                    :active="
+                                        route()
+                                            .current()
+                                            .startsWith('extra-menu')
+                                    "
+                                >
+                                    Extra Menu
+                                </NavLink>
                             </div>
                         </div>
 
