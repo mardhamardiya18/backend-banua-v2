@@ -103,6 +103,17 @@ setTimeout(() => {
                                 >
                                     Galeri Produk
                                 </NavLink>
+
+                                <NavLink
+                                    :href="route('menu-option.index')"
+                                    :active="
+                                        route()
+                                            .current()
+                                            .startsWith('menu-option')
+                                    "
+                                >
+                                    Manage Menu
+                                </NavLink>
                             </div>
                         </div>
 

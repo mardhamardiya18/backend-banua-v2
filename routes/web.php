@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\MenuOptionController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubproductController;
 use Illuminate\Foundation\Application;
@@ -38,5 +39,8 @@ Route::middleware([
     Route::resource('subproduct', SubproductController::class);
 
     // Product Gallery
-    Route::resource('gallery', GalleryController::class);
+    Route::resource('gallery', GalleryController::class)->except(['show', 'edit', 'update']);
+
+    // Menu Options
+    Route::resource('menu-option', MenuOptionController::class)->except(['show', 'edit', 'update']);
 });

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class MenuOption extends Model
 {
     //
-    protected $fillable = ['name', 'extra_price', 'menu_type'];
+    protected $fillable = ['name', 'menu_type'];
 
     public function subproducts()
     {

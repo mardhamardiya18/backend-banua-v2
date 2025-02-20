@@ -23,7 +23,7 @@ class MenuoptionRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'extra_price' => 'required|numeric',
+
             'menu_type' => 'required|in:rice,utama,pendamping,pelengkap',
         ];
     }
