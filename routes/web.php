@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\BannerController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ExtraMenuController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\MenuOptionController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubproductController;
+use App\Http\Controllers\Web\HomeController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -19,6 +21,7 @@ Route::get('/', function () {
     ]);
 });
 
+// ADMIN ROUTES
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -26,7 +29,7 @@ Route::middleware([
     'admin',
 ])->prefix('admin')->group(function () {
     Route::get('/', function () {
-        return Inertia::render('Dashboard');
+        return Inertia::render('Admin/Dashboard');
     })->name('dashboard');
 
     // Category
@@ -47,4 +50,10 @@ Route::middleware([
 
     // Extra Menu
     Route::resource('extra-menu', ExtraMenuController::class);
+
+    // Banner
+    Route::resource('banner', BannerController::class);
 });
+
+// WEB ROUTES
+Route::get('/', [HomeController::class, 'index'])->name('home');

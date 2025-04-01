@@ -1,10 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@plugin "flowbite-typography";
+
 
 
 
 [x-cloak] {
     display: none;
+}
+
+.myButton{
+    @apply text-white bg-primary hover:bg-rose-800 focus:ring-4 focus:outline-none focus:ring-rose-300 font-medium rounded-full text-xs lg:text-sm px-4 py-2 lg:px-6 lg:py-3 text-center
+}
+
+.myButton2{
+    @apply text-primary border border-primary hover:bg-rose-600 transition hover:text-white focus:ring-4 focus:outline-none focus:ring-rose-300 font-medium rounded-full text-sm px-4 py-2 lg:px-6 lg:py-3 text-center
 }

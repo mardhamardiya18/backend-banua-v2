@@ -1,6 +1,8 @@
 import "./bootstrap";
 import "../css/app.css";
 import "quill/dist/quill.snow.css";
+import "@splidejs/vue-splide/css";
+import VueSplide from "@splidejs/vue-splide";
 
 import { createApp, h } from "vue";
 import { createInertiaApp } from "@inertiajs/vue3";
@@ -22,6 +24,7 @@ createInertiaApp({
         return createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(ZiggyVue)
+            .use(VueSplide)
             .mount(el);
     },
     progress: {

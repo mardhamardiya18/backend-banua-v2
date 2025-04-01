@@ -17,7 +17,7 @@ class GalleryController extends Controller
     public function index()
     {
 
-        return Inertia::render('Gallery/Index', [
+        return Inertia::render('Admin/Gallery/Index', [
             'galleries' => ProductGallery::with('product')->latest()->get()
         ]);
     }
@@ -28,7 +28,7 @@ class GalleryController extends Controller
     public function create()
     {
         $products = Product::latest()->get();
-        return Inertia::render('Gallery/Create', [
+        return Inertia::render('Admin/Gallery/Create', [
             'products' => $products
         ]);
     }

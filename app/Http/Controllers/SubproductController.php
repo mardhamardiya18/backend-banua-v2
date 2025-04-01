@@ -16,7 +16,7 @@ class SubproductController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Subproduct/Index', [
+        return Inertia::render('Admin/Subproduct/Index', [
             'subproducts' => SubProduct::with('product')->latest()->get()
         ]);
     }
@@ -27,7 +27,7 @@ class SubproductController extends Controller
     public function create()
     {
         $products = Product::latest()->get();
-        return Inertia::render('Subproduct/Create', [
+        return Inertia::render('Admin/Subproduct/Create', [
             'products' => $products
         ]);
     }
@@ -56,7 +56,7 @@ class SubproductController extends Controller
     public function edit(SubProduct $subproduct)
     {
         $products = Product::latest()->get();
-        return Inertia::render('Subproduct/Edit', [
+        return Inertia::render('Admin/Subproduct/Edit', [
             'subproduct' => $subproduct,
             'products' => $products
         ]);

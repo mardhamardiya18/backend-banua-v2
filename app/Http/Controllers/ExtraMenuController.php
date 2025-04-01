@@ -16,7 +16,7 @@ class ExtraMenuController extends Controller
      */
     public function index()
     {
-        return Inertia::render('ExtraMenu/Index', [
+        return Inertia::render('Admin/ExtraMenu/Index', [
             'items' => SubproductMenuoption::with(['subproduct.product', 'menuoption'])->latest()->get()
         ]);
     }
@@ -26,7 +26,7 @@ class ExtraMenuController extends Controller
      */
     public function create()
     {
-        return Inertia::render('ExtraMenu/Create', [
+        return Inertia::render('Admin/ExtraMenu/Create', [
             'subproducts' => SubProduct::with('product')->latest()->get(),
             'menuoptions' => MenuOption::latest()->get()
         ]);
@@ -55,7 +55,7 @@ class ExtraMenuController extends Controller
      */
     public function edit(SubproductMenuoption $extraMenu)
     {
-        return Inertia::render('ExtraMenu/Edit', [
+        return Inertia::render('Admin/ExtraMenu/Edit', [
             'extraMenu' => $extraMenu,
             'subproducts' => SubProduct::with('product')->latest()->get(),
             'menuoptions' => MenuOption::latest()->get()

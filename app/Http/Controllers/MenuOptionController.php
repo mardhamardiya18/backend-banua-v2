@@ -15,7 +15,7 @@ class MenuOptionController extends Controller
     public function index()
     {
         //
-        return Inertia::render('MenuOption/Index', [
+        return Inertia::render('Admin/MenuOption/Index', [
             'menuOptions' => MenuOption::latest()->get()
         ]);
     }

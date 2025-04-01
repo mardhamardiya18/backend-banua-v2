@@ -18,7 +18,7 @@ class ProductController extends Controller
     public function index()
     {
         //
-        return Inertia::render('Product/Index', [
+        return Inertia::render('Admin/Product/Index', [
             'products' => Product::with('category')->latest()->get()
         ]);
     }
@@ -30,7 +30,7 @@ class ProductController extends Controller
     {
         $categories = Category::latest()->get();
 
-        return Inertia::render('Product/Create', [
+        return Inertia::render('Admin/Product/Create', [
             'categories' => $categories
         ]);
     }
@@ -65,7 +65,7 @@ class ProductController extends Controller
         $product = Product::with('category')->findOrFail($product->id); // Get the product with the category
         $categories = Category::latest()->get();
 
-        return Inertia::render('Product/Edit', [
+        return Inertia::render('Admin/Product/Edit', [
             'product' => $product,
             'categories' => $categories
         ]);

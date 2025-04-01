@@ -49,7 +49,7 @@ setTimeout(() => {
                                 <Link :href="route('dashboard')">
                                     <img
                                         class="block h-12 w-auto rounded-full"
-                                        src="/image/LOGO.jpg"
+                                        src="/image/logo.svg"
                                         alt="Logo"
                                     />
                                 </Link>
@@ -124,6 +124,15 @@ setTimeout(() => {
                                     "
                                 >
                                     Extra Menu
+                                </NavLink>
+
+                                <NavLink
+                                    :href="route('banner.index')"
+                                    :active="
+                                        route().current().startsWith('banner')
+                                    "
+                                >
+                                    Banner
                                 </NavLink>
                             </div>
                         </div>
