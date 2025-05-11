@@ -15,7 +15,7 @@
                 v-for="banner in banners"
                 :key="banner.id"
                 data-splide-interval="1500"
-                class="max-w-xs h-[180px]"
+                class="max-w-xs h-[200px]"
             >
                 <div class="h-full rounded-3xl overflow-hidden relative border">
                     <figure class="w-full h-full absolute">

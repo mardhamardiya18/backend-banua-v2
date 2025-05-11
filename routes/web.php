@@ -57,3 +57,5 @@ Route::middleware([
 
 // WEB ROUTES
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/kategori/{slug}', [HomeController::class, 'category'])->name('category');
+Route::get('/produk', [HomeController::class, 'product'])->name('product');

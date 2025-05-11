@@ -10,7 +10,9 @@
                         class="h-[65px] rounded-full"
                         alt="Banua Tumpeng"
                     />
-                    <a href="#" class="myButton">PO Sekarang</a>
+                    <a href="#" class="btn btn-warning text-base-content"
+                        >Order Sekarang</a
+                    >
                 </header>
             </nav>
 

@@ -17,11 +17,15 @@ export default {
             fontFamily: {
                 sans: ["Poppins", ...defaultTheme.fontFamily.sans],
             },
-            colors: {
-                primary: "#AB2435",
-            },
         },
     },
 
-    plugins: [forms, typography],
+    plugins: [forms, typography, require("daisyui")],
+
+    daisyui: {
+        themes: ["light", "dark"], // atau bisa pakai theme kustom
+        darkTheme: "dark", // jika ingin mendukung dark mode
+        logs: true, // opsional, bisa diaktifkan untuk debugging
+        prefix: "", // kosong artinya tidak ada prefix
+    },
 };
