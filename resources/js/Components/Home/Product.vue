@@ -17,7 +17,17 @@
             aria-label="My Favorite Images"
         >
             <SplideSlide v-for="random in randoms" :key="random.id">
-                <div class="h-full rounded-3xl overflow-hidden relative border">
+                <div v-if="loading" class="flex w-full flex-col gap-4">
+                    <div class="skeleton h-32 w-full"></div>
+                    <div class="skeleton h-4 w-28"></div>
+                    <div class="skeleton h-4 w-full"></div>
+                    <div class="skeleton h-4 w-full"></div>
+                </div>
+
+                <div
+                    v-else
+                    class="h-full rounded-3xl overflow-hidden relative border"
+                >
                     <figure class="w-full h-full absolute">
                         <img
                             class="w-full h-full object-cover"
@@ -42,7 +52,7 @@
                         </span>
                     </div>
                     <Link
-                        :href="route('product')"
+                        :href="route('product', random.slug)"
                         class="absolute inset-0"
                     ></Link>
                 </div>
@@ -53,6 +63,7 @@
 
 <script setup>
 import { Link } from "@inertiajs/vue3";
+import { ref, watch } from "vue";
 
 const formatRupiah = (value) => {
     if (!value) return "Rp 0";
@@ -66,6 +77,18 @@ const formatRupiah = (value) => {
 const { randoms } = defineProps({
     randoms: Object,
 });
+
+const loading = ref(true);
+
+watch(
+    () => randoms,
+    (newVal) => {
+        if (newVal && newVal.length > 0) {
+            setTimeout(() => (loading.value = false), 1300); // Tambah delay 500ms
+        }
+    },
+    { immediate: true }
+);
 </script>
 
 <style lang="scss" scoped></style>

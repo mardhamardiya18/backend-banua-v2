@@ -17,7 +17,12 @@
                 data-splide-interval="1500"
                 class="max-w-xs h-[200px]"
             >
-                <div class="h-full rounded-3xl overflow-hidden relative border">
+                <div class="skeleton w-full h-full" v-if="loading"></div>
+
+                <div
+                    v-else
+                    class="h-full rounded-3xl overflow-hidden relative border"
+                >
                     <figure class="w-full h-full absolute">
                         <img
                             class="w-full h-full object-cover object-center"
@@ -34,9 +39,23 @@
 </template>
 
 <script setup>
+import { ref, watch } from "vue";
+
 const { banners } = defineProps({
     banners: Object,
 });
+
+const loading = ref(true);
+
+watch(
+    () => banners,
+    (newVal) => {
+        if (newVal && newVal.length > 0) {
+            setTimeout(() => (loading.value = false), 1300); // Tambah delay 500ms
+        }
+    },
+    { immediate: true }
+);
 </script>
 
 <style lang="scss" scoped></style>

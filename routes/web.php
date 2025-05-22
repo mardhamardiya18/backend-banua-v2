@@ -7,6 +7,7 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\MenuOptionController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubproductController;
+use App\Http\Controllers\Web\DetailController;
 use App\Http\Controllers\Web\HomeController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -58,4 +59,4 @@ Route::middleware([
 // WEB ROUTES
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/kategori/{slug}', [HomeController::class, 'category'])->name('category');
-Route::get('/produk', [HomeController::class, 'product'])->name('product');
+Route::get('/{slug}', [DetailController::class, 'index'])->name('product');
