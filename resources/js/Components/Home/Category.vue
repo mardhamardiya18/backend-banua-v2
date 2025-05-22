@@ -1,6 +1,6 @@
 <template>
     <div class="px-4">
-        <h2 class="font-semibold mb-4 text-lg">Kategori Paket</h2>
+        <h2 class="font-semibold mb-5 text-lg">Kategori Paket</h2>
         <div class="grid grid-cols-4 place-items-center gap-4">
             <div
                 v-for="category in categories"

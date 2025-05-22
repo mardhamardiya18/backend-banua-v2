@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2 class="font-semibold mb-4 px-4 text-xl">
+        <h2 class="font-semibold mb-5 px-4 text-xl">
             Dan mereka puas dengan pesanannya!
         </h2>
         <Splide

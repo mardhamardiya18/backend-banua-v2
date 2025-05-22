@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class SubProduct extends Model
 {
     //
-    protected $fillable = ['product_id', 'portion', 'price', 'discount', 'extra', 'size', 'note'];
+    protected $fillable = ['product_id', 'portion', 'price', 'discount', 'extra', 'size', 'note', 'is_recommended'];
 
     public function product()
     {
