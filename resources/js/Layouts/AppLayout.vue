@@ -134,6 +134,17 @@ setTimeout(() => {
                                 >
                                     Banner
                                 </NavLink>
+
+                                <NavLink
+                                    :href="route('testimoni.index')"
+                                    :active="
+                                        route()
+                                            .current()
+                                            .startsWith('testimoni')
+                                    "
+                                >
+                                    Testimoni
+                                </NavLink>
                             </div>
                         </div>
 

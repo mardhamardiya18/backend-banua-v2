@@ -3,7 +3,7 @@
         <BannerSlider :banners="banners" />
         <Category :categories="categories" />
         <Product :randoms="randoms" />
-        <Testimoni />
+        <Testimoni :testimonials="testimonials" />
         <Recommend :recommends="is_recommends" />
     </HomeLayout>
 </template>
@@ -16,12 +16,14 @@ import Recommend from "@/Components/Home/Recommend.vue";
 import Testimoni from "@/Components/Home/Testimoni.vue";
 import HomeLayout from "@/Layouts/HomeLayout.vue";
 
-const { categories, banners, randoms, is_recommends } = defineProps({
-    categories: Array,
-    banners: Array,
-    is_recommends: Array,
-    randoms: Array,
-});
+const { categories, banners, randoms, is_recommends, testimonials } =
+    defineProps({
+        categories: Array,
+        banners: Array,
+        is_recommends: Array,
+        randoms: Array,
+        testimonials: Array,
+    });
 </script>
 
 <style lang="scss" scoped></style>

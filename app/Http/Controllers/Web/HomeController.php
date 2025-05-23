@@ -7,6 +7,7 @@ use App\Models\Banner;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\SubProduct;
+use App\Models\Testimoni;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -26,6 +27,7 @@ class HomeController extends Controller
             'banners' => Banner::orderBy('order')->where('active', true)->get(),
             'is_recommends' => SubProduct::with('product')->where('is_recommended', true)->limit(3)->get(),
             'randoms' => $randoms,
+            'testimonials' => Testimoni::latest()->get(),
         ]);
     }
 

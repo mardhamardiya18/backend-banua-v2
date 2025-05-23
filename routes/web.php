@@ -7,6 +7,7 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\MenuOptionController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubproductController;
+use App\Http\Controllers\TestimoniController;
 use App\Http\Controllers\Web\DetailController;
 use App\Http\Controllers\Web\HomeController;
 use Illuminate\Foundation\Application;
@@ -54,6 +55,9 @@ Route::middleware([
 
     // Banner
     Route::resource('banner', BannerController::class);
+
+    // Testimoni
+    Route::resource('testimoni', TestimoniController::class)->except(['show', 'edit', 'update']);
 });
 
 // WEB ROUTES

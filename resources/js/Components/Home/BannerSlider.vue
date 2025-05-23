@@ -1,5 +1,5 @@
 <template>
-    <section class="relative max-w-sm mt-5">
+    <div class="relative max-w-sm mt-5">
         <Splide
             :options="{
                 type: 'loop',
@@ -35,7 +35,7 @@
                 </div>
             </SplideSlide>
         </Splide>
-    </section>
+    </div>
 </template>
 
 <script setup>
