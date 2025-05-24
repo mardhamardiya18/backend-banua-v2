@@ -108,7 +108,7 @@ const destroy = (id) => {
                                 <td class="p-4">
                                     <img
                                         :src="`/storage/${category.img_url}`"
-                                        class="w-16 md:w-32 max-w-full max-h-full"
+                                        class="w-24 h-24 object-cover rounded-full"
                                         alt="Apple Watch"
                                     />
                                 </td>

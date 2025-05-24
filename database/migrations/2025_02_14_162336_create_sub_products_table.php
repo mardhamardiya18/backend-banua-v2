@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('sub_products', function (Blueprint $table) {
             $table->id();
-            $table->string('portion');
+            $table->string('name');
             $table->string('price');
             $table->integer('discount')->nullable();
             $table->integer('extra');

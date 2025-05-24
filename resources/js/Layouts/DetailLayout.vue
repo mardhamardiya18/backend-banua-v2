@@ -111,19 +111,31 @@
                     class="border-2 border-amber-300 rounded-xl flex items-center justify-between gap-x-3 bg-base-content shadow-[0px_12px_30px_0px_#07041517] p-3 pl-6"
                 >
                     <span class="flex flex-col text-base-300">
-                        <span class="font-bold text-lg">Paket Reguler</span>
+                        <span class="font-bold text-lg">{{
+                            product.name
+                        }}</span>
                         <span class="flex gap-x-1">
                             <span
                                 class="text-xs badge badge-primary animate-pulse"
                                 >Mulai</span
                             >
-                            <span>Rp 200.000</span>
+                            <span>{{
+                                product.sub_products.length
+                                    ? formatRupiah(
+                                          Math.min(
+                                              ...product.sub_products.map(
+                                                  (s) => s.price
+                                              )
+                                          )
+                                      )
+                                    : "-"
+                            }}</span>
                         </span>
                     </span>
-                    <RouterLink
-                        :to="{ name: 'order' }"
+                    <a
+                        href="#"
                         class="btn btn-warning flex items-center justify-center text-base-content"
-                        >Buat Pesanan</RouterLink
+                        >Buat Pesanan</a
                     >
                 </div>
             </div>
@@ -132,14 +144,24 @@
 </template>
 
 <script setup>
-import { Head } from "@inertiajs/vue3";
+import { Head, Link } from "@inertiajs/vue3";
 
 const props = defineProps({
     title: {
         type: String,
         default: "Produk",
     },
+    product: Object,
 });
+
+const formatRupiah = (value) => {
+    if (!value) return "Rp 0";
+    return new Intl.NumberFormat("id-ID", {
+        style: "currency",
+        currency: "IDR",
+        minimumFractionDigits: 0, // Tanpa koma desimal
+    }).format(value);
+};
 </script>
 
 <style lang="scss" scoped></style>

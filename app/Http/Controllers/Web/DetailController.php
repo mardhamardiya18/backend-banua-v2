@@ -11,7 +11,7 @@ class DetailController extends Controller
     //
     public function index($slug)
     {
-        $product = Product::where('slug', $slug)->firstOrFail();
+        $product = Product::with(['productGalleries', 'subProducts'])->where('slug', $slug)->firstOrFail();
         return inertia('Web/Detail', [
             'product' => $product,
         ]);

@@ -22,7 +22,7 @@ class SubproductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'portion' => 'required',
+            'name' => 'required',
             'discount' => 'required|numeric',
             'size' => 'required|numeric',
             'extra' => 'required|numeric',

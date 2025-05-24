@@ -16,6 +16,9 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug')->unique();
             $table->text('description');
+            $table->integer('price')->nullable(); // digunakan jika tidak ada subproduct
+            $table->integer('size')->nullable();
+            $table->boolean('has_subproducts')->default(false);
 
             $table->foreignId('category_id')->constrained()->cascadeOnDelete();
             $table->timestamps();

@@ -9,29 +9,10 @@
         </div>
         <div>
             <h2 class="font-bold my-3">Deskripsi paket</h2>
-            <p class="font-light text-neutral-content">
-                Introducing our perfect way for any kids occasion. This package
-                includes a variety of mouth-watering appetizers, this package
-                ensures , main courses, and desserts, all items crafted with the
-                freshest ingredients.
-            </p>
-        </div>
-
-        <div>
-            <h2 class="font-bold my-3">Isiannya apa aja?</h2>
-            <ul class="font-light text-neutral-content">
-                <li class="flex items-center gap-2">
-                    <i class="bx bx-check bx-sm text-primary"></i> 1 Nasi
-                    Tumpeng
-                </li>
-                <li class="flex items-center gap-2">
-                    <i class="bx bx-check bx-sm text-primary"></i> 1 Ayam Goreng
-                </li>
-                <li class="flex items-center gap-2">
-                    <i class="bx bx-check bx-sm text-primary"></i> 1 Telur
-                    Balado
-                </li>
-            </ul>
+            <p
+                v-html="product.description"
+                class="font-light text-neutral-content"
+            ></p>
         </div>
 
         <div>
@@ -50,7 +31,15 @@
                     >
                         <i class="bx bx-package text-white bx-sm"></i>
                     </span>
-                    <p>Tampah D35cm</p>
+                    <p>
+                        Tampah/mika D{{
+                            product.sub_products.length
+                                ? Math.min(
+                                      ...product.sub_products.map((s) => s.size)
+                                  )
+                                : "-"
+                        }}cm
+                    </p>
                 </div>
                 <div class="flex items-center gap-2">
                     <span
@@ -92,6 +81,10 @@
     </section>
 </template>
 
-<script setup></script>
+<script setup>
+const { product } = defineProps({
+    product: Object,
+});
+</script>
 
 <style lang="scss" scoped></style>

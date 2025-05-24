@@ -50,6 +50,41 @@
                 </div>
 
                 <div class="mb-5">
+                    <fieldset
+                        class="fieldset bg-transparent text-neutral rounded-box w-64 border p-4"
+                    >
+                        <legend class="fieldset-legend text-neutral">
+                            Ada sub produk?
+                        </legend>
+                        <label class="label">
+                            <input
+                                v-model="data.hasSubproduct"
+                                type="checkbox"
+                                checked="checked"
+                                class="toggle toggle-primary toggle-lg"
+                            />
+                        </label>
+                    </fieldset>
+                </div>
+
+                <!-- Price for non sub product -->
+                <div class="mb-5" v-if="!data.hasSubproduct">
+                    <label
+                        for="price"
+                        class="block mb-2 text-sm font-medium text-gray-900"
+                        >Harga</label
+                    >
+                    <input
+                        v-model="data.price"
+                        type="number"
+                        id="price"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        placeholder=""
+                        required
+                    />
+                </div>
+
+                <div class="mb-5">
                     <label
                         for="thumbnail"
                         class="block mb-2 text-sm font-medium text-gray-900"
@@ -101,7 +136,7 @@
                 <label class="block mb-2 text-sm font-medium text-gray-900"
                     >Buat deskripsi produk</label
                 >
-                <div ref="editor"></div>
+                <div ref="editor" class="text-neutral"></div>
 
                 <div class="mt-5">
                     <button
@@ -145,6 +180,8 @@ const data = reactive({
     name: "",
     category: "",
     thumbnail: null,
+    price: 0,
+    hasSubproduct: false,
 });
 
 const handleFileUpload = (e) => {
@@ -166,6 +203,8 @@ const store = () => {
             formData.append("category_id", data.category);
             formData.append("thumbnail", data.thumbnail);
             formData.append("description", quill.root.innerHTML);
+            formData.append("price", data.price);
+            formData.append("has_subproducts", data.hasSubproduct ? "1" : "0");
 
             router.post("/admin/product", formData, {
                 forceFormData: true,
@@ -175,7 +214,18 @@ const store = () => {
                         text: "The product has been added",
                         icon: "success",
                         timer: 1000,
+                        showConfirmButton: false,
                     });
+                },
+                onError: (errors) => {
+                    const errorMessage = Object.values(errors)[0];
+
+                    Swal.fire({
+                        title: "Error",
+                        text: errorMessage,
+                        icon: "error",
+                    });
+                    console.error(errors);
                 },
             });
         }
